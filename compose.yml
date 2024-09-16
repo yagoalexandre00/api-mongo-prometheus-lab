@@ -50,3 +50,12 @@ services:
       MONGODB_URI: "mongodb://pedelogo:pedelogopass@mongodb:27017"
     depends_on:
       - mongodb
+
+  grafana:
+    image: grafana/grafana:main
+    container_name: grafana
+    restart: unless-stopped
+    networks:
+      - pedelogo
+    ports:
+      - "3000:3000"
