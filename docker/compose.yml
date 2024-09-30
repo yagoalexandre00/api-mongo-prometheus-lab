@@ -6,6 +6,7 @@ networks:
 services:
   web:
     image: kubedevio/pedelogo-catalogo:v1.0.0
+    container_name: webapi
     ports:
       - 8080:80
     networks:
@@ -21,6 +22,7 @@ services:
 
   mongodb:
     image: mongo:4.1
+    container_name: mongodb
     ports:
       - 27017:27017
     networks:
@@ -31,6 +33,7 @@ services:
 
   prometheus:
     image: prom/prometheus:v2.24.1
+    container_name: prometheus
     ports:
       - 9090:9090
     depends_on:
@@ -43,6 +46,7 @@ services:
 
   mongodb_exporter:
     image: fabricioveronez/mongo_exporter
+    container_name: mongo_exporter
     ports:
       - 9216:9216
     networks:
@@ -60,3 +64,12 @@ services:
       - pedelogo
     ports:
       - "3000:3000"
+
+  alertmanager:
+    image: prom/alertmanager:v0.27.0
+    container_name: alertmanager
+    ports:
+      - "9093:9093"
+    restart: always
+    networks:
+      - pedelogo

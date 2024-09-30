@@ -7,10 +7,8 @@ rule_files:
 alerting:
   alertmanagers:
     - scheme: http
-      timeout: 10s
-      api_version: v1
       static_configs:
-        - targets: []
+        - targets: ['alertmanager:9093']
 scrape_configs:
   - job_name: prometheus
     static_configs:
@@ -28,3 +26,4 @@ scrape_configs:
     scrape_timeout: 2s
     static_configs:
       - targets: ["mongodb_exporter:9216"]
+
